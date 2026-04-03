@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  @apply bg-[#0B0F19] text-white;
+  font-family: 'Inter', sans-serif;
+}
+
+.gradient-text {
+  @apply bg-gradient-to-r from-blue-500 via-purple-500 to-green-400 bg-clip-text text-transparent;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-primary {
+  @apply px-5 py-2 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 hover:opacity-90 transition;
+}
