@@ -7,10 +7,12 @@ export default function ExportButton() {
   return (
     <button
       onClick={() => exportCSV(transactions)}
-      className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm transition hover:bg-white/10"
+      className="flex h-10 items-center justify-center gap-2 rounded-xl border border-[var(--border-color)] bg-[var(--bg-primary)] px-5 py-2 text-xs font-black uppercase tracking-widest text-[var(--text-primary)] transition-all hover:bg-blue-500 hover:text-white hover:border-blue-500 disabled:cursor-not-allowed disabled:opacity-30 dark:bg-white/10 shadow-sm shadow-black/5"
       disabled={!transactions.length}
+      aria-label="Export to CSV"
     >
-      Export CSV
+      <span className="text-sm">📥</span>
+      <span>Export</span>
     </button>
   );
 }

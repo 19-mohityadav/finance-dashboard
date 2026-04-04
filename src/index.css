@@ -2,6 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --border-color: rgba(0, 0, 0, 0.05);
+  --sidebar-active: rgba(59, 130, 246, 0.1);
+  --sidebar-hover: rgba(0, 0, 0, 0.02);
+  --card-bg: #ffffff;
+  --glass-bg: rgba(255, 255, 255, 0.7);
+}
+
+.dark {
+  --bg-primary: #0b0f19;
+  --bg-secondary: rgba(255, 255, 255, 0.02);
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.6);
+  --border-color: rgba(255, 255, 255, 0.05);
+  --sidebar-active: rgba(255, 255, 255, 0.1);
+  --sidebar-hover: rgba(255, 255, 255, 0.05);
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --glass-bg: rgba(11, 15, 25, 0.8);
+}
+
 html,
 body,
 #root {
@@ -10,22 +34,50 @@ body,
 
 body {
   margin: 0;
-  background: #0b0f19;
-  color: white;
-  font-family: Inter, system-ui, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .gradient-text {
-  @apply bg-gradient-to-r from-blue-500 via-purple-500 to-green-400 bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-blue-500 via-indigo-500 to-emerald-400 bg-clip-text text-transparent underline-offset-4;
 }
 
 .glass {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.08);
 }
 
 .btn-primary {
-  @apply rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 px-5 py-2 font-medium transition hover:opacity-90;
+  @apply relative overflow-hidden rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 px-6 py-2.5 font-bold tracking-tight text-white shadow-lg shadow-blue-500/20 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-blue-500/30 active:scale-95;
+}
+
+.card {
+  @apply rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] p-6 shadow-sm transition-all duration-300;
+}
+
+.card:hover {
+  @apply border-blue-500/20 shadow-md transform -translate-y-1;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
 }
