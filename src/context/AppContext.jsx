@@ -23,6 +23,7 @@ export const AppProvider = ({ children }) => {
   });
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingTransaction, setEditingTransaction] = useState(null);
+  const [activeTab, setActiveTab] = useState("overview");
 
   useEffect(() => {
     localStorage.setItem("transactions", JSON.stringify(transactions));
@@ -76,6 +77,8 @@ export const AppProvider = ({ children }) => {
         setDark,
         isFormOpen,
         editingTransaction,
+        activeTab,
+        setActiveTab,
         addTransaction,
         updateTransaction,
         deleteTransaction,
