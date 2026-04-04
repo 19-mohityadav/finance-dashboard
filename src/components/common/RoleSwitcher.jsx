@@ -1,10 +1,14 @@
 import { useApp } from "../../context/AppContext";
 
+/**
+ * Access Control Toggler allowing demonstration of Buyer vs Admin roles.
+ * Affects permissions across transactions and creation forms.
+ */
 export default function RoleSwitcher() {
   const { role, setRole } = useApp();
 
   return (
-    <div className="flex h-10 items-center justify-center rounded-xl bg-[var(--bg-primary)] px-4 py-2 border border-[var(--border-color)] dark:bg-white/10 shadow-sm transition-all hover:bg-[var(--sidebar-hover)] select-none">
+    <div className="flex h-10 items-center justify-center rounded-xl bg-[var(--bg-primary)] px-4 py-2 border border-[var(--border-color)] shadow-sm transition-all hover:bg-[var(--sidebar-hover)] select-none">
       <span className="mr-3 text-xs font-black uppercase tracking-widest text-[var(--text-secondary)]">ROLE</span>
       <select
         value={role}

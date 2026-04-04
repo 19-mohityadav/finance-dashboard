@@ -1,15 +1,16 @@
-import Navbar from "../components/layout/Navbar";
-import Sidebar from "../components/layout/Sidebar";
-import SummarySection from "../components/dashboard/SummarySection";
-import ChartsSection from "../components/dashboard/ChartsSection";
-import FilterBar from "../components/transactions/FilterBar";
-import TransactionList from "../components/transactions/TransactionList";
-import Insights from "../components/insights/Insights";
-import AddTransactionModal from "../components/transactions/AddTransactionModal";
 import { useApp } from "../context/AppContext";
+import Sidebar from "../components/layout/Sidebar";
+import Navbar from "../components/layout/Navbar";
+import SummarySection from "../features/dashboard/SummarySection";
+import ChartsSection from "../features/dashboard/ChartsSection";
+import TransactionTable from "../features/transactions/TransactionTable";
+import FilterBar from "../features/transactions/FilterBar";
+import AddTransactionModal from "../features/transactions/AddTransactionModal";
+import Insights from "../features/insights/Insights";
+
 
 export default function Dashboard() {
-  const { activeTab } = useApp();
+  const { activeTab, setActiveTab, isLoading } = useApp();
 
   return (
     <div className="flex h-screen overflow-hidden">
@@ -19,60 +20,62 @@ export default function Dashboard() {
 
         <main className="flex-1 overflow-y-auto overflow-x-hidden p-6 lg:p-8">
           <div className="mx-auto max-w-7xl animate-in fade-in slide-in-from-bottom-4 duration-700">
-            {activeTab === "overview" && (
+            {isLoading ? (
+              <div className="space-y-8">
+                <div className="grid gap-6 md:grid-cols-3">
+                  {[...Array(3)].map((_, i) => (
+                    <div key={i} className="h-44 w-full animate-pulse rounded-[2rem] bg-[var(--card-bg)] opacity-40" />
+                  ))}
+                </div>
+                <div className="h-[400px] w-full animate-pulse rounded-[2rem] bg-[var(--card-bg)] opacity-40" />
+              </div>
+            ) : (
+              <>
+                {activeTab === "overview" && (
               <div className="space-y-8 pb-10">
                 <SummarySection />
                 <ChartsSection />
                 <div className="grid gap-8 lg:grid-cols-[1.5fr_1fr]">
-                  <div className="space-y-8">
-                    <div className="flex items-center justify-between">
-                      <h2 className="text-xl font-bold tracking-tight">Recent Activity</h2>
+                  <div className="space-y-6">
+                    <div className="flex items-center justify-between border-b border-[var(--border-color)] pb-4">
+                      <h2 className="text-xl font-black tracking-tight text-[var(--text-primary)]">
+                        Recent Activity
+                      </h2>
+                      <button 
+                        onClick={() => setActiveTab("transactions")}
+                        className="text-sm font-bold text-indigo-500 hover:text-indigo-600 transition-colors"
+                      >
+                        View All →
+                      </button>
                     </div>
-                    <div className="space-y-6">
-                      <FilterBar />
-                      <TransactionList limit={5} />
-                    </div>
+                    <TransactionTable limit={5} />
                   </div>
                   <div className="space-y-6">
-                    <h2 className="text-xl font-bold tracking-tight">Smart AI Insights</h2>
+                    <h2 className="text-xl font-bold tracking-tight">Intelligence Feed</h2>
                     <Insights />
                   </div>
                 </div>
               </div>
             )}
 
+            {/* Transactions Tab: Advanced Multi-Filter Ledger Management */}
             {activeTab === "transactions" && (
               <div className="space-y-8 pb-10">
-                <div className="flex flex-col gap-2">
-                  <h2 className="text-3xl font-bold tracking-tight">Transaction History</h2>
-                  <p className="text-[var(--text-secondary)]">Manage and filter your financial records</p>
-                </div>
-                <div className="space-y-6">
-                  <FilterBar />
-                  <TransactionList />
-                </div>
+                <FilterBar />
+                <TransactionTable />
               </div>
             )}
 
-            {activeTab === "insights" && (
-              <div className="space-y-8 pb-10">
-                <div className="flex flex-col gap-2">
-                  <h2 className="text-3xl font-bold tracking-tight">Financial Intelligence</h2>
-                  <p className="text-[var(--text-secondary)]">AI-driven patterns and recommendations</p>
-                </div>
-                <div className="grid gap-8 lg:grid-cols-2">
-                  <Insights fullWidth />
-                  <div className="card space-y-4">
-                    <h3 className="text-lg font-semibold">Spending Trends</h3>
-                    <p className="text-sm text-[var(--text-secondary)]">
-                      Your fixed expenses have increased by 12% since last month. Consider reviewing your subscriptions.
-                    </p>
-                    <div className="h-32 w-full rounded-xl bg-gradient-to-r from-blue-100 to-indigo-100 dark:from-white/5 dark:to-white/10" />
+                {activeTab === "insights" && (
+                  <div className="grid gap-8 lg:grid-cols-2">
+                    <Insights />
+                    <ChartsSection />
                   </div>
-                </div>
-              </div>
+                )}
+              </>
             )}
           </div>
+
         </main>
       </div>
 
