@@ -1,16 +1,19 @@
 import { useApp } from "../../context/AppContext";
 
+/**
+ * Universal Theme Toggler (Dark/Light). Performs global state transition
+ * and ensures visual consistency across all components.
+ */
 export default function ThemeToggle() {
   const { dark, setDark } = useApp();
 
   return (
     <button
       onClick={() => setDark(!dark)}
-      className="flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--border-color)] bg-[var(--bg-primary)] dark:bg-white/10 text-lg shadow-sm transition-all duration-300 hover:scale-110 hover:shadow-md active:scale-95"
+      className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)] text-xl transition-all hover:bg-[var(--sidebar-hover)] active:scale-95 shadow-sm"
       aria-label="Toggle Theme"
-      title={dark ? "Switch to Light Mode" : "Switch to Dark Mode"}
     >
-      {dark ? "☀️" : "🌙"}
+      {dark ? "🌙" : "☀️"}
     </button>
   );
 }
