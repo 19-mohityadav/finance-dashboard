@@ -6,7 +6,7 @@ A clean, interactive, and responsive **finance dashboard** built as a frontend i
 
 ## 🚀 Live Demo
 
-> Deploy link here (e.g., Vercel / Netlify)
+> Deploy Link : https://finance-dashboard-iota-mauve.vercel.app/
 
 ---
 
